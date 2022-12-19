@@ -16,21 +16,22 @@ const Error = lazy(() => import("pages/Error/Error"));
 export const App = () => {
 
   return <Container>
+    <Routes>
       <nav className={style.navList}>
         <Link to="/"  className={style.navLink}>Home</Link>
         <Link to="/movies" className={style.navLink}>Movies</Link>
     </nav>
     <Suspense fallback={<div>Loading...</div>}>
-    <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/movies" element={<Movies />} />
       <Route path="/movies/:movieId" element={<MovieDetails />}>
         <Route path="cast" element={<Cast />} />
         <Route path="reviews" element={<Reviews/>} />
       </Route>
-      <Route path="*" element={<Error /> } />
+        <Route path="*" element={<Error />} />
+        </Suspense>
       </Routes>
-      </Suspense>
+      
   </Container>
 }
 
