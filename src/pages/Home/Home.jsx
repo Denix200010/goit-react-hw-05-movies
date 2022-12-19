@@ -7,7 +7,6 @@ const Home = () => {
     const [popularFilms, setPopularFilms] = useState([]);
     const location = useLocation();
     useEffect(() => {
-        
         fetchPopularFilms().then(res => {
             setPopularFilms([...res.results])
         })

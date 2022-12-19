@@ -2,23 +2,16 @@ import style from './movieDetails.module.css'
 
 import { useEffect, useState } from "react";
 import { useParams, Outlet, Link, useLocation} from "react-router-dom";
-
-const API_KEY = '9ed87961dbb9b8beebb5f02b4b9b3eb3';
+import { fetchCurrentFilm } from 'components/API';
 
 const MovieDetails = () => {
     const [goBackState, setGoBackState] = useState('/movies');
     const { movieId } = useParams();
     const [currentFilm, setCurrentFilm] = useState({});
     const location = useLocation();
-    
 
-    
     useEffect(() => {
         if (goBackState === '/movies') setGoBackState(location.state?.from ?? '/movies');
-        const fetchCurrentFilm = async (id) => {
-            const findCurrentFilm = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
-            return findCurrentFilm.json();
-        }
         fetchCurrentFilm(movieId).then(res => {
             setCurrentFilm({ ...res })
         })

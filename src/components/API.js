@@ -9,5 +9,16 @@ const fetchMovieByName = async (name) => {
     const findMovie = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${name}`);
     return findMovie.json();
 }
-
-export{fetchPopularFilms, fetchMovieByName}
+const fetchCurrentFilm = async (id) => {
+            const findCurrentFilm = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`);
+            return findCurrentFilm.json();
+}
+const fetchReviews = async (id) => {
+            const findReviews = await fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
+            return findReviews.json();
+}
+const fetchCurrentCast = async (id) => {
+            const findCurrentCast = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
+            return findCurrentCast.json();
+        }
+export{fetchPopularFilms, fetchMovieByName, fetchCurrentFilm, fetchReviews, fetchCurrentCast}

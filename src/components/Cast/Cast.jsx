@@ -1,16 +1,12 @@
+import { fetchCurrentCast } from "components/API";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const API_KEY = '9ed87961dbb9b8beebb5f02b4b9b3eb3';
 
 const Cast = () => {
     const { movieId } = useParams();
     const [currentCast, setCurrentCast] = useState([]);
     useEffect(() => {
-        const fetchCurrentCast = async (id) => {
-            const findCurrentCast = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`);
-            return findCurrentCast.json();
-        }
         fetchCurrentCast(movieId).then(res => {
             setCurrentCast([...res.cast]);
         })
